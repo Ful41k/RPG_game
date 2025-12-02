@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include "player.h"
+#include "tavern.h"
 #include "village-menu.h"
 #include "utils.h"
 #include "color.h"
@@ -30,59 +31,59 @@ void rest(Player* hero) {
 }
 
 // Tavern option
-void tavern(Player* hero) {
-    int choice;
+// void tavern(Player* hero) {
+//     int choice;
 
-    while (1) {
-        printf("\n===== Tavern Shop =====\n");
-        printf("Your coins: %d\n", hero->coins);
-        printf("1. Buy Small Healing Potion (5 coins)\n");
-        printf("2. Buy Big Healing Potion (12 coins)\n");
-        printf("3. Buy Damage Boost (+2 dmg for next fight) - 15 coins\n");
-        printf("0. Exit Tavern\n");
-        printf("Choose an option: ");
-        scanf("%d", &choice);
+//     while (1) {
+//         printf("\n===== Tavern Shop =====\n");
+//         printf("Your coins: %d\n", hero->coins);
+//         printf("1. Buy Small Healing Potion (5 coins)\n");
+//         printf("2. Buy Big Healing Potion (12 coins)\n");
+//         printf("3. Buy Damage Boost (+2 dmg for next fight) - 15 coins\n");
+//         printf("0. Exit Tavern\n");
+//         printf("Choose an option: ");
+//         scanf("%d", &choice);
 
-        switch (choice) {
-            case 1:
-                if (hero->coins >= 5) {
-                    hero->coins -= 5;
-                    hero->potionsSmall++;
-                    printf("You purchased a Small Potion!\n");
-                } else {
-                    printf("Not enough coins!\n");
-                }
-                break;
+//         switch (choice) {
+//             case 1:
+//                 if (hero->coins >= 5) {
+//                     hero->coins -= 5;
+//                     hero->potionsSmall++;
+//                     printf("You purchased a Small Potion!\n");
+//                 } else {
+//                     printf("Not enough coins!\n");
+//                 }
+//                 break;
 
-            case 2:
-                if (hero->coins >= 12) {
-                    hero->coins -= 12;
-                    hero->potionsBig++;
-                    printf("You purchased a Big Potion!\n");
-                } else {
-                    printf("Not enough coins!\n");
-                }
-                break;
+//             case 2:
+//                 if (hero->coins >= 12) {
+//                     hero->coins -= 12;
+//                     hero->potionsBig++;
+//                     printf("You purchased a Big Potion!\n");
+//                 } else {
+//                     printf("Not enough coins!\n");
+//                 }
+//                 break;
 
-            case 3:
-                if (hero->coins >= 15) {
-                    hero->coins -= 15;
-                    hero->damageBoost += 2;
-                    printf("You feel stronger! (+2 damage on next fight)\n");
-                } else {
-                    printf("Not enough coins!\n");
-                }
-                break;
+//             case 3:
+//                 if (hero->coins >= 15) {
+//                     hero->coins -= 15;
+//                     hero->damageBoost += 2;
+//                     printf("You feel stronger! (+2 damage on next fight)\n");
+//                 } else {
+//                     printf("Not enough coins!\n");
+//                 }
+//                 break;
 
-            case 0:
-                printf("Leaving the tavern...\n");
-                return;
+//             case 0:
+//                 printf("Leaving the tavern...\n");
+//                 return;
 
-            default:
-                printf("Invalid choice!\n");
-        }
-    }
-}
+//             default:
+//                 printf("Invalid choice!\n");
+//         }
+//     }
+// }
 
 void startMission(Player* hero) {
     printf("\nMission system not ready yet. Placeholder.\n");
@@ -137,4 +138,3 @@ void villageMenu(Player* hero) {
 
 
 }
-
