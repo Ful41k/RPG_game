@@ -1,9 +1,20 @@
-// #ifndef SAVE_H
-// #define SAVE_H
+#ifndef SAVE_H
+#define SAVE_H
 
-// #include "player.h"
+#include "player.h"
 
-// void saveGame(Player* hero);
-// //load game
+typedef struct {
+    char name[50];
+    int lifePoints;
+    int level;
+    int hp;
+    int coins;
+    int itemsCount;
+    int completedMissions;
+    int finalMissionUnlocked; // 0 = no, 1 = final mission unlocked
+} Save;
 
-// #endif
+void saveGame(Player* hero);
+void loadGameMenu();
+
+#endif
