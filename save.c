@@ -2,12 +2,25 @@
 #include "save.h"
 #include "player.h"
 
+// Сохранение данных в файл
 void saveGame(Player* hero) {
-    // your real save code here
-    printf("Game saved!\n");
+    FILE* file = fopen("savegame.dat", "wb"); // wb = write binary
+    if (file) {
+        fwrite(hero, sizeof(Player), 1, file);
+        fclose(file);
+    } else {
+        printf("Error: Could not create save file.\n");
+    }
 }
 
-// TEMPORARY STUB — prevents linker error
-void loadGameMenu() {
-    printf("Load Game Menu is not implemented yet!\n");
+// Загрузка данных из файла
+// Возвращает 1, если успешно, и 0, если файла нет
+int loadGame(Player* hero) {
+    FILE* file = fopen("savegame.dat", "rb"); // rb = read binary
+    if (file) {
+        fread(hero, sizeof(Player), 1, file);
+        fclose(file);
+        return 1; // Успех
+    }
+    return 0; // Файл не найден
 }

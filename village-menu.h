@@ -3,11 +3,6 @@
 
 #include "player.h"
 
-void villageIntro(Player* hero);
-void villageMenu(Player* hero);
-
-void rest(Player* hero);
-void tavern(Player* hero);
-void startMission(Player* hero);
+void enterVillage(Player* hero);
 
 #endif

@@ -1,9 +1,12 @@
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define YELLOW "\033[33m"
-#define BLUE "\033[34m"
-#define RESET "\033[0m"
-#define BrightRed	"\033[1;31m"
-#define BrightGreen	"\033[1;32m"
-#define BrightBlue	"\033[1;34m"
-#define BrightCyan	"\033[1;36m"
+#ifndef COLOR_H
+#define COLOR_H
+
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m" // Обязательно добавьте это
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m" // И это
+#define RESET   "\x1b[0m"
+
+#endif

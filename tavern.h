@@ -3,6 +3,6 @@
 
 #include "player.h"
 
-void tavern(Player* hero);
+void enterTavern(Player* hero);
 
 #endif

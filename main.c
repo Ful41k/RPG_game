@@ -1,72 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 #include <time.h>
-
-#include "cheats.h"
 #include "player.h"
-#include "utils.h"
 #include "village-menu.h"
 #include "save.h"
+#include "cheats.h"
+#include "color.h"
+#include "utils.h"
 
-void showInitialMenu(bool cheatsVisible) {
-    printf("\n=== Legends of the Dark Lord ===\n");
-    printf("1. New Game\n");
-    printf("2. Load Game\n");
-    if (cheatsVisible) {
-        printf("3. Cheats\n");
-    }
-    printf("Choose an action: ");
-}
+int main() {
+    // Кодировка только для Windows
+    #ifdef _WIN32
+        system("chcp 65001 > nul");
+    #endif
 
-void processInitialMenu(CheatState* cheats, Save* savedGames, int savedCount) {
-    char input[100];
-    showInitialMenu(cheats->cheatsUnlocked);
+    srand(time(NULL));
 
-    if (!fgets(input, sizeof(input), stdin)) {
-        return;
-    }
-
-    for (int i = 0; i < strlen(input); i++) {
-        char ch = input[i];
-        if (ch == ' ' || ch == '\n') continue;
-        processKonamiInput(cheats, ch);
-    }
-    if (cheats->cheatsUnlocked) {
-        return;  // prevents "Invalid choice"
-    }
-
-    int choice = atoi(input);
-
-    if (choice == 1) {
-        Player hero = createNewHero();
-        villageIntro(&hero);
-        villageMenu(&hero);
-        return;
-    }
-    if (choice == 2) {
-        loadGameMenu();
-        return;
-    }
-    if (choice == 3 && cheats->cheatsUnlocked) {
-        showCheatsMenu(savedGames, savedCount);
-        return;
-    }
-
-    printf("Invalid choice.\n");
-}
-
-
-
-int main(void) {
-    Save savedGames[10];
-    int savedCount = 0;
-    CheatState cheat = {0};
+    print_typewriter(RED "\n=== SHADOWS OF ARXEN ===" RESET, 60);
 
     while (1) {
-        processInitialMenu(&cheat, savedGames, savedCount);
-    }
+        print_typewriter("\n=== Main Menu ===", 20);
+        print_typewriter("1. New Game", 20);
+        print_typewriter("2. Load Game", 20);
+        print_typewriter("3. Exit", 20);
+        print_prompt("Choose: ", 20);
 
+        int choice;
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n');
+            continue;
+        }
+        while (getchar() != '\n');
+
+        if (choice == 1) {
+            Player hero = createNewHero();
+            enterVillage(&hero);
+        } else if (choice == 2) {
+            Player hero;
+            if (loadGame(&hero)) {
+                print_typewriter(GREEN "Save loaded successfully." RESET, 20);
+                enterVillage(&hero);
+            } else {
+                print_typewriter(RED "No save file found." RESET, 20);
+            }
+        } else if (choice == 3) {
+            print_typewriter("Closing game...", 40);
+            break;
+        }
+    }
     return 0;
 }
