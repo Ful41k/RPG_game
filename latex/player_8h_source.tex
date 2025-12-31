@@ -1,0 +1,48 @@
+\doxysection{player.\+h}
+\hypertarget{player_8h_source}{}\label{player_8h_source}\mbox{\hyperlink{player_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ INVENTORY\_SIZE\ 10}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structPlayer_afee5bda32eb073523dcfe69363dcdd17}{name}}[32];}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structPlayer_a5eb82601dac1d4d7b253073658d1dfe8}{saveDate}}[30];\ \textcolor{comment}{//\ Added\ to\ store:\ "{}11-\/10-\/2025\ 15:03:29"{}}}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a2baad6b9a274417a7374baf11d5f723d}{hp}};}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a641821c012b140de3758bd6eff87c7b7}{maxhp}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a05c91bea7717cff003ff4ef262cbf2e3}{atk}};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_af93595b7910c3ced000fa5962b1900aa}{def}};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_adeeb2f4856cdf6a0facef94a892c751c}{coins}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a1d4156a726b589688eeb092e1bdf1c73}{xpToNextLevel}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a95d75784ecb6773797cf27eebd696967}{rage}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a8666dd1e07bde522ad14b3fa81f34f3e}{maxRage}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a56be70a21b75d8dc26de8f33886c94f0}{isDay}};\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structPlayer_a2da7c61d9102e35344a6d45d5631637d}{inventory}}[\mbox{\hyperlink{player_8h_a393cc96155b2e45d4022ec3893bb2c84}{INVENTORY\_SIZE}}][32];}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a96922967b09ff53ae659b7993230dae9}{inventoryCount}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a9fe8c591081a5b37ff0494fef5dd7097}{potionsSmall}};\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a54841a3e89c4a0fa50fca98badf6e094}{potionsBig}};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_adbf7b1e93ca6915e6742896e16712bdf}{hasBaseSword}};\ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_aa3e89d206eb8e86617dcbe0c76cb2b21}{hasBaseArmor}};\ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a0f2424d1f73c15aeacf1c712009b80c1}{hasCastleKey}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a1a376f54ed48fd0bfd8f6f5813bd6ffc}{upgradeLevelSword}};\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_ad2dcb47d38c03f08345ddc5127befe88}{upgradeLevelArmor}};\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a933a2c6f77231eb378bf00ff3a95a878}{knowsSadMan}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a674870270197f1d49f00bb4565089e2d}{knowsWoman}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a75f5e00217af2e64703ade42e603550b}{blacksmithUnlocked}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a99b39c98a2483fc756b42a4a29dea30c}{elaraQuestStatus}};\ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_aa7d7453f8a856674c803845b0370b7d3}{introBarnabyDone}};\ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_aaf1f489fdd2d5421c14bf2df5f4880b5}{hangover}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a8d1ff08b4d7c5e2bb4bf2e18012a5a0f}{aleDrankCount}};\ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a0550728245f3fdaea35aabb75bd928cc}{maxUnlockedMission}};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPlayer_a3d1f7f76db51688292ed59982df518a8}{hasHeroSword}};\ }
+\DoxyCodeLine{00036\ \}\ \mbox{\hyperlink{structPlayer}{Player}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ Function\ prototypes}}
+\DoxyCodeLine{00039\ \mbox{\hyperlink{structPlayer}{Player}}\ \mbox{\hyperlink{player_8h_a7d74c35407f819b5be279f26b9b8ae37}{createNewHero}}();}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_a4f9663c9cb15466169143672c331b854}{addXp}}(\mbox{\hyperlink{structPlayer}{Player}}*\ hero,\ \textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{player_8h_aea0ca72d142424e40cd11fb471384928}{addItemToInventory}}(\mbox{\hyperlink{structPlayer}{Player}}*\ hero,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ itemName);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

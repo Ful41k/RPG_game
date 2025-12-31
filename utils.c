@@ -1,3 +1,11 @@
+/**
+ * @file utils.c
+ * @brief Cross-platform terminal utilities for text rendering and input.
+ * * This module provides abstraction for Windows and Unix-based systems (Linux/macOS).
+ * It handles the "Typewriter" effect, screen clearing, and non-blocking input
+ * detection used to skip text animations.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "utils.h"
@@ -33,7 +41,12 @@
         system("clear");
     }
 
-    // Реализация kbhit() для Linux
+    /**
+     * @brief Detects if a keyboard key has been pressed (Non-blocking).
+     * * Uses termios to disable canonical mode and echo, then sets fcntl 
+     * to non-blocking to check the stdin buffer.
+     * @return 1 if a key is waiting in the buffer, 0 otherwise.
+     */
     static int kbhit_check() {
         struct termios oldt, newt;
         int ch;
@@ -58,7 +71,10 @@
         return 0;
     }
 
-    // Реализация getch() для Linux
+    /**
+     * @brief Reads a single character from the keyboard without echoing to screen.
+     * @return The integer value of the character read.
+     */
     static int getch_read() {
         struct termios oldt, newt;
         int ch;
@@ -72,8 +88,16 @@
     }
 #endif
 
-// --- ОБЩАЯ ЛОГИКА ---
-
+/**
+ * @brief Prints text character-by-character with skip functionality.
+ * * Logic:
+ * 1. Iterates through the string.
+ * 2. Checks @ref kbhit_check for user input; if found, switches to "skip mode."
+ * 3. Detects ANSI escape sequences (starting with '\x1b') to print them 
+ * instantly, preventing broken color codes during the animation.
+ * * @param text The string to print (supports ANSI colors).
+ * @param speed Delay in milliseconds between characters.
+ */
 void print_typewriter(const char* text, int speed) {
     int skip = 0;
     while (*text) {
@@ -99,6 +123,13 @@ void print_typewriter(const char* text, int speed) {
     fflush(stdout);
 }
 
+/**
+ * @brief Prints a prompt without a trailing newline for user input.
+ * * Similar to @ref print_typewriter but does not add a '\n' at the end,
+ * making it ideal for "Choice: " or "Enter name: " prompts.
+ * * @param text The prompt text.
+ * @param speed Animation speed.
+ */
 void print_prompt(const char* text, int speed) {
     int skip = 0;
     while (*text) {

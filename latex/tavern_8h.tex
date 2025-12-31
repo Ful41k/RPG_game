@@ -1,0 +1,50 @@
+\doxysection{tavern.\+h File Reference}
+\hypertarget{tavern_8h}{}\label{tavern_8h}\index{tavern.h@{tavern.h}}
+
+
+Social hub for healing, gambling, and quest management.  
+
+
+{\ttfamily \#include "{}player.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{tavern_8h_ac6fe71159316e1a731ee189cdb57b1f6}{enter\+Tavern}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Entry point for the Tavern. Changes behavior based on hero-\/\texorpdfstring{$>$}{>}is\+Day. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Social hub for healing, gambling, and quest management. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{tavern_8h_ac6fe71159316e1a731ee189cdb57b1f6}\index{tavern.h@{tavern.h}!enterTavern@{enterTavern}}
+\index{enterTavern@{enterTavern}!tavern.h@{tavern.h}}
+\doxysubsubsection{\texorpdfstring{enterTavern()}{enterTavern()}}
+{\footnotesize\ttfamily \label{tavern_8h_ac6fe71159316e1a731ee189cdb57b1f6} 
+void enter\+Tavern (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Entry point for the Tavern. Changes behavior based on hero-\/\texorpdfstring{$>$}{>}is\+Day. 
+
+
+\begin{DoxyItemize}
+\item Day\+: Trading and Quest dialogue.
+\item Night\+: Gambling and Sleeping.
+\end{DoxyItemize}
+
+Entry point for the Tavern. Changes behavior based on hero-\/\texorpdfstring{$>$}{>}is\+Day.
+
+
+\begin{DoxyItemize}
+\item Branches between Day and Night versions of the tavern.
+\item {\bfseries{Day\+:}} Access to quests and the blacksmith hint.
+\item {\bfseries{Night\+:}} Access to gambling and sleeping. 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

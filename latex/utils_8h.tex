@@ -1,0 +1,101 @@
+\doxysection{utils.\+h File Reference}
+\hypertarget{utils_8h}{}\label{utils_8h}\index{utils.h@{utils.h}}
+
+
+Function prototypes for cross-\/platform utilities.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{utils_8h_ad613350af6366c6ece6bc694206f8e14}{print\+\_\+typewriter}} (const char \texorpdfstring{$\ast$}{*}text, int speed)
+\begin{DoxyCompactList}\small\item\em Character-\/by-\/character text effect. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{utils_8h_a62dbaa54b4f3fec8c88d33ff96d2a0c4}{print\+\_\+prompt}} (const char \texorpdfstring{$\ast$}{*}text, int speed)
+\begin{DoxyCompactList}\small\item\em Animated prompt for input. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{utils_8h_a8aa473f8ae9a91df4bc9ea700983c72d}{delay\+\_\+ms}} (int ms)
+\begin{DoxyCompactList}\small\item\em Cross-\/platform millisecond sleep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{utils_8h_a4953d1edcbbfc7e420c423ded1d5621a}{clear\+\_\+screen}} ()
+\begin{DoxyCompactList}\small\item\em Cross-\/platform terminal clearing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function prototypes for cross-\/platform utilities. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{utils_8h_a4953d1edcbbfc7e420c423ded1d5621a}\index{utils.h@{utils.h}!clear\_screen@{clear\_screen}}
+\index{clear\_screen@{clear\_screen}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{clear\_screen()}{clear\_screen()}}
+{\footnotesize\ttfamily \label{utils_8h_a4953d1edcbbfc7e420c423ded1d5621a} 
+void clear\+\_\+screen (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Cross-\/platform terminal clearing. 
+
+\Hypertarget{utils_8h_a8aa473f8ae9a91df4bc9ea700983c72d}\index{utils.h@{utils.h}!delay\_ms@{delay\_ms}}
+\index{delay\_ms@{delay\_ms}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{delay\_ms()}{delay\_ms()}}
+{\footnotesize\ttfamily \label{utils_8h_a8aa473f8ae9a91df4bc9ea700983c72d} 
+void delay\+\_\+ms (\begin{DoxyParamCaption}\item[{int}]{ms}{}\end{DoxyParamCaption})}
+
+
+
+Cross-\/platform millisecond sleep. 
+
+\Hypertarget{utils_8h_a62dbaa54b4f3fec8c88d33ff96d2a0c4}\index{utils.h@{utils.h}!print\_prompt@{print\_prompt}}
+\index{print\_prompt@{print\_prompt}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{print\_prompt()}{print\_prompt()}}
+{\footnotesize\ttfamily \label{utils_8h_a62dbaa54b4f3fec8c88d33ff96d2a0c4} 
+void print\+\_\+prompt (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{int}]{speed}{}\end{DoxyParamCaption})}
+
+
+
+Animated prompt for input. 
+
+Animated prompt for input.
+
+
+\begin{DoxyItemize}
+\item Similar to \doxylink{utils_8c_ad613350af6366c6ece6bc694206f8e14}{print\+\_\+typewriter} but does not add a \textquotesingle{}~\newline
+\textquotesingle{} at the end, making it ideal for "{}\+Choice\+: "{} or "{}\+Enter name\+: "{} prompts.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em text} & The prompt text. \\
+\hline
+{\em speed} & Animation speed. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{utils_8h_ad613350af6366c6ece6bc694206f8e14}\index{utils.h@{utils.h}!print\_typewriter@{print\_typewriter}}
+\index{print\_typewriter@{print\_typewriter}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{print\_typewriter()}{print\_typewriter()}}
+{\footnotesize\ttfamily \label{utils_8h_ad613350af6366c6ece6bc694206f8e14} 
+void print\+\_\+typewriter (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{text}{, }\item[{int}]{speed}{}\end{DoxyParamCaption})}
+
+
+
+Character-\/by-\/character text effect. 
+
+Character-\/by-\/character text effect.
+
+
+\begin{DoxyItemize}
+\item Logic\+:
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item Iterates through the string.
+\item Checks kbhit\+\_\+check for user input; if found, switches to "{}skip mode."{}
+\item Detects ANSI escape sequences (starting with \textquotesingle{}\textbackslash{}x1b\textquotesingle{}) to print them instantly, preventing broken color codes during the animation.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item 
+\begin{DoxyParams}{Parameters}
+{\em text} & The string to print (supports ANSI colors). \\
+\hline
+{\em speed} & Delay in milliseconds between characters. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

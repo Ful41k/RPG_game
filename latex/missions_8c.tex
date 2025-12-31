@@ -1,0 +1,149 @@
+\doxysection{missions.\+c File Reference}
+\hypertarget{missions_8c}{}\label{missions_8c}\index{missions.c@{missions.c}}
+
+
+Logic and flow for all story missions and combat encounters.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}missions.\+h"{}}\newline
+{\ttfamily \#include "{}player.\+h"{}}\newline
+{\ttfamily \#include "{}color.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+{\ttfamily \#include "{}final.\+h"{}}\newline
+{\ttfamily \#include "{}save.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{missions_8c_a7776ade95035ce6ab6d61b9a35c264ed}{TEXT\+\_\+\+SPEED}}~20
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{missions_8c_a80b7e4147f547f9ea6b227e97dd3c1d1}{display\+Status\+Bar}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Renders the visual status bar at the top of the terminal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{missions_8c_a536ae28a61a5536d0b06ec1a72f6878d}{battle\+Normal\+Fight}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero, const char \texorpdfstring{$\ast$}{*}name, int fatal\+Strike, int dmg, int reward, int \texorpdfstring{$\ast$}{*}killed)
+\begin{DoxyCompactList}\small\item\em Core combat logic for a turn-\/based fight. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{missions_8c_a9b616c48b9be482c1ebc21b9dd522d6b}{run\+Mission}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero, int mission\+Id)
+\begin{DoxyCompactList}\small\item\em Entry point for selecting and starting a mission biome. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{missions_8c_ab80f005039b55cdbdbea52bbbad3c622}{wait\+For\+Enter}} ()
+\begin{DoxyCompactList}\small\item\em Helper to pause the game and wait for user input. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{missions_8c_a72caffca3b09d0fe73e87e18d89a8c3c}{is\+Padovan}} (int n)
+\begin{DoxyCompactList}\small\item\em Determines if a number is part of the Padovan sequence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Logic and flow for all story missions and combat encounters. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{missions_8c_a7776ade95035ce6ab6d61b9a35c264ed}\index{missions.c@{missions.c}!TEXT\_SPEED@{TEXT\_SPEED}}
+\index{TEXT\_SPEED@{TEXT\_SPEED}!missions.c@{missions.c}}
+\doxysubsubsection{\texorpdfstring{TEXT\_SPEED}{TEXT\_SPEED}}
+{\footnotesize\ttfamily \label{missions_8c_a7776ade95035ce6ab6d61b9a35c264ed} 
+\#define TEXT\+\_\+\+SPEED~20}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{missions_8c_a536ae28a61a5536d0b06ec1a72f6878d}\index{missions.c@{missions.c}!battleNormalFight@{battleNormalFight}}
+\index{battleNormalFight@{battleNormalFight}!missions.c@{missions.c}}
+\doxysubsubsection{\texorpdfstring{battleNormalFight()}{battleNormalFight()}}
+{\footnotesize\ttfamily \label{missions_8c_a536ae28a61a5536d0b06ec1a72f6878d} 
+void battle\+Normal\+Fight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{int}]{fatal\+Strike}{, }\item[{int}]{dmg}{, }\item[{int}]{reward}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{killed}{}\end{DoxyParamCaption})}
+
+
+
+Core combat logic for a turn-\/based fight. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to player. \\
+\hline
+{\em name} & Name of the enemy. \\
+\hline
+{\em fatal\+Strike} & Number needed on a D6 roll to hit the enemy. \\
+\hline
+{\em dmg} & Damage taken if the player fails the roll. \\
+\hline
+{\em reward} & Coins granted on victory. \\
+\hline
+{\em killed} & Pointer to int flag to notify the mission if enemy died. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{missions_8c_a80b7e4147f547f9ea6b227e97dd3c1d1}\index{missions.c@{missions.c}!displayStatusBar@{displayStatusBar}}
+\index{displayStatusBar@{displayStatusBar}!missions.c@{missions.c}}
+\doxysubsubsection{\texorpdfstring{displayStatusBar()}{displayStatusBar()}}
+{\footnotesize\ttfamily \label{missions_8c_a80b7e4147f547f9ea6b227e97dd3c1d1} 
+void display\+Status\+Bar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Renders the visual status bar at the top of the terminal. 
+
+
+\begin{DoxyItemize}
+\item Displays\+:
+\item \doxylink{structPlayer}{Player} identity (Name)
+\item Vitality (HP/\+Max\+HP)
+\item Wealth (Coins)
+\item Combat stats (ATK/\+DEF)
+\item Temporal status (Day/\+Night)
+\item Equipment (Sword/\+Armor)
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{missions_8c_a72caffca3b09d0fe73e87e18d89a8c3c}\index{missions.c@{missions.c}!isPadovan@{isPadovan}}
+\index{isPadovan@{isPadovan}!missions.c@{missions.c}}
+\doxysubsubsection{\texorpdfstring{isPadovan()}{isPadovan()}}
+{\footnotesize\ttfamily \label{missions_8c_a72caffca3b09d0fe73e87e18d89a8c3c} 
+int is\+Padovan (\begin{DoxyParamCaption}\item[{int}]{n}{}\end{DoxyParamCaption})}
+
+
+
+Determines if a number is part of the Padovan sequence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The number to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if true, 0 if false. 
+\end{DoxyReturn}
+\Hypertarget{missions_8c_a9b616c48b9be482c1ebc21b9dd522d6b}\index{missions.c@{missions.c}!runMission@{runMission}}
+\index{runMission@{runMission}!missions.c@{missions.c}}
+\doxysubsubsection{\texorpdfstring{runMission()}{runMission()}}
+{\footnotesize\ttfamily \label{missions_8c_a9b616c48b9be482c1ebc21b9dd522d6b} 
+void run\+Mission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{, }\item[{int}]{mission\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Entry point for selecting and starting a mission biome. 
+
+Main entry point to start a specific mission biome.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player struct. \\
+\hline
+{\em mission\+Id} & The ID of the mission to load. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{missions_8c_ab80f005039b55cdbdbea52bbbad3c622}\index{missions.c@{missions.c}!waitForEnter@{waitForEnter}}
+\index{waitForEnter@{waitForEnter}!missions.c@{missions.c}}
+\doxysubsubsection{\texorpdfstring{waitForEnter()}{waitForEnter()}}
+{\footnotesize\ttfamily \label{missions_8c_ab80f005039b55cdbdbea52bbbad3c622} 
+void wait\+For\+Enter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Helper to pause the game and wait for user input. 
+
+Utility function to pause execution until the user presses Enter. Clears the input buffer before waiting. 

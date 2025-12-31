@@ -1,0 +1,100 @@
+\doxysection{save.\+c File Reference}
+\hypertarget{save_8c}{}\label{save_8c}\index{save.c@{save.c}}
+
+
+Implementation of binary save/load operations and file management.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}save.\+h"{}}\newline
+{\ttfamily \#include "{}player.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{save_8c_a683017938524be87419472072de966ac}{get\+Current\+Time\+String}} (char \texorpdfstring{$\ast$}{*}buffer)
+\begin{DoxyCompactList}\small\item\em Generates a formatted date/time string for the save metadata. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{save_8c_a27aaf96e9bd1214e6dbe3077942fc5ff}{save\+Game}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{structPlayer}{Player} struct to a binary file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{save_8c_a509cf9dee9e097d06b5631e7c0ba6e09}{load\+Game\+Menu}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em UI and logic for managing save files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of binary save/load operations and file management. 
+
+
+\begin{DoxyItemize}
+\item This module manages the persistence of the \doxylink{structPlayer}{Player} struct. It includes a dynamic slot system and a file-\/reorganization algorithm for deletions. 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\Hypertarget{save_8c_a683017938524be87419472072de966ac}\index{save.c@{save.c}!getCurrentTimeString@{getCurrentTimeString}}
+\index{getCurrentTimeString@{getCurrentTimeString}!save.c@{save.c}}
+\doxysubsubsection{\texorpdfstring{getCurrentTimeString()}{getCurrentTimeString()}}
+{\footnotesize\ttfamily \label{save_8c_a683017938524be87419472072de966ac} 
+void get\+Current\+Time\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{buffer}{}\end{DoxyParamCaption})}
+
+
+
+Generates a formatted date/time string for the save metadata. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Character buffer to store the timestamp. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{save_8c_a509cf9dee9e097d06b5631e7c0ba6e09}\index{save.c@{save.c}!loadGameMenu@{loadGameMenu}}
+\index{loadGameMenu@{loadGameMenu}!save.c@{save.c}}
+\doxysubsubsection{\texorpdfstring{loadGameMenu()}{loadGameMenu()}}
+{\footnotesize\ttfamily \label{save_8c_a509cf9dee9e097d06b5631e7c0ba6e09} 
+int load\+Game\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+UI and logic for managing save files. 
+
+Displays available saves and handles Loading or Deletion.
+
+
+\begin{DoxyItemize}
+\item Features\+:
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item {\bfseries{Scan\+:}} Loops and reads all "{}save\+\_\+\+X.\+dat"{} files to display stats.
+\item {\bfseries{Load\+:}} Reads the binary data directly into the hero struct.
+\item {\bfseries{Delete\+:}} Removes a file and {\bfseries{reorganizes}} the remaining files (e.\+g., if you delete slot 2, slot 3 is renamed to 2) to maintain a continuous list.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure to be populated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if a game was loaded, 0 if deleted or cancelled. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\Hypertarget{save_8c_a27aaf96e9bd1214e6dbe3077942fc5ff}\index{save.c@{save.c}!saveGame@{saveGame}}
+\index{saveGame@{saveGame}!save.c@{save.c}}
+\doxysubsubsection{\texorpdfstring{saveGame()}{saveGame()}}
+{\footnotesize\ttfamily \label{save_8c_a27aaf96e9bd1214e6dbe3077942fc5ff} 
+void save\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Serializes the \doxylink{structPlayer}{Player} struct to a binary file. 
+
+Saves the current Hero state to a binary file (.dat). Automatically finds the next available slot (save\+\_\+1.\+dat, save\+\_\+2.\+dat, etc.).
+
+
+\begin{DoxyItemize}
+\item Automatically iterates through "{}save\+\_\+\+X.\+dat"{} names to find the first empty slot to prevent overwriting existing saves. 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player data to be saved. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

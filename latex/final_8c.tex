@@ -1,0 +1,75 @@
+\doxysection{final.\+c File Reference}
+\hypertarget{final_8c}{}\label{final_8c}\index{final.c@{final.c}}
+
+
+Implementation of the endgame mission and Rock-\/\+Paper-\/\+Scissors boss battle.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}final.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+{\ttfamily \#include "{}color.\+h"{}}\newline
+{\ttfamily \#include "{}missions.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{final_8c_ae742e6eea55b4b3e6a6e96eeb8d61837}{final\+Boss\+Battle}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Executes the final duel against Arxen Voidheart. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{final_8c_a5d47c8e2a22c99d283dea003e66344c2}{run\+Final\+Mission}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em The final narrative sequence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the endgame mission and Rock-\/\+Paper-\/\+Scissors boss battle. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{final_8c_ae742e6eea55b4b3e6a6e96eeb8d61837}\index{final.c@{final.c}!finalBossBattle@{finalBossBattle}}
+\index{finalBossBattle@{finalBossBattle}!final.c@{final.c}}
+\doxysubsubsection{\texorpdfstring{finalBossBattle()}{finalBossBattle()}}
+{\footnotesize\ttfamily \label{final_8c_ae742e6eea55b4b3e6a6e96eeb8d61837} 
+void final\+Boss\+Battle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Executes the final duel against Arxen Voidheart. 
+
+
+\begin{DoxyItemize}
+\item Uses a Victory Point system (Best of 5 / First to 3). Combat is a themed Rock-\/\+Paper-\/\+Scissors\+:
+\item Shield (Rock) beats Sword (Scissors)
+\item Magic (Paper) beats Shield (Rock)
+\item Sword (Scissors) beats Magic (Paper)
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{final_8c_a5d47c8e2a22c99d283dea003e66344c2}\index{final.c@{final.c}!runFinalMission@{runFinalMission}}
+\index{runFinalMission@{runFinalMission}!final.c@{final.c}}
+\doxysubsubsection{\texorpdfstring{runFinalMission()}{runFinalMission()}}
+{\footnotesize\ttfamily \label{final_8c_a5d47c8e2a22c99d283dea003e66344c2} 
+void run\+Final\+Mission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+The final narrative sequence. 
+
+Main sequence for the Dark Lord\textquotesingle{}s Castle mission. Handles the 10-\/corridor progression, random Void whispers, and triggers the final boss battle.
+
+
+\begin{DoxyItemize}
+\item Iterates through 10 rooms with\+:
+\item 60\% Chance\+: Narrative whispers from Arxen.
+\item 25\% Chance\+: Combat encounter (-\/3 HP).
+\item 15\% Chance\+: Trap/\+Healing events. 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

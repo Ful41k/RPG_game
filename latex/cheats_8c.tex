@@ -1,0 +1,68 @@
+\doxysection{cheats.\+c File Reference}
+\hypertarget{cheats_8c}{}\label{cheats_8c}\index{cheats.c@{cheats.c}}
+
+
+Implementation of developer cheat functions.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}cheats.\+h"{}}\newline
+{\ttfamily \#include "{}player.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+{\ttfamily \#include "{}color.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{cheats_8c_a7776ade95035ce6ab6d61b9a35c264ed}{TEXT\+\_\+\+SPEED}}~20
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cheats_8c_a9f204358de0d669e88c091f78e72d9d6}{run\+Cheat\+Menu}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Displays the secret dev menu and handles input for stat modification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of developer cheat functions. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{cheats_8c_a7776ade95035ce6ab6d61b9a35c264ed}\index{cheats.c@{cheats.c}!TEXT\_SPEED@{TEXT\_SPEED}}
+\index{TEXT\_SPEED@{TEXT\_SPEED}!cheats.c@{cheats.c}}
+\doxysubsubsection{\texorpdfstring{TEXT\_SPEED}{TEXT\_SPEED}}
+{\footnotesize\ttfamily \label{cheats_8c_a7776ade95035ce6ab6d61b9a35c264ed} 
+\#define TEXT\+\_\+\+SPEED~20}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cheats_8c_a9f204358de0d669e88c091f78e72d9d6}\index{cheats.c@{cheats.c}!runCheatMenu@{runCheatMenu}}
+\index{runCheatMenu@{runCheatMenu}!cheats.c@{cheats.c}}
+\doxysubsubsection{\texorpdfstring{runCheatMenu()}{runCheatMenu()}}
+{\footnotesize\ttfamily \label{cheats_8c_a9f204358de0d669e88c091f78e72d9d6} 
+void run\+Cheat\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Displays the secret dev menu and handles input for stat modification. 
+
+Launches the secret developer cheat menu.
+
+
+\begin{DoxyItemize}
+\item Options\+:
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item Add 1000 Coins.
+\item Unlock all missions and grant quest items (Sword/\+Key).
+\item Set all stats to 999.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

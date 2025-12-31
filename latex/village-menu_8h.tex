@@ -1,0 +1,55 @@
+\doxysection{village-\/menu.h File Reference}
+\hypertarget{village-menu_8h}{}\label{village-menu_8h}\index{village-\/menu.h@{village-\/menu.h}}
+
+
+Header for the village hub system.  
+
+
+{\ttfamily \#include "{}player.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{village-menu_8h_af714c720a9bcb37dc9852d2d3159fdc7}{enter\+Village}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Enters the main village square loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header for the village hub system. 
+
+
+\begin{DoxyItemize}
+\item This module acts as the central navigation hub for the game. It connects the player to the Tavern, the Blacksmith, and the Mission systems. 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\Hypertarget{village-menu_8h_af714c720a9bcb37dc9852d2d3159fdc7}\index{village-\/menu.h@{village-\/menu.h}!enterVillage@{enterVillage}}
+\index{enterVillage@{enterVillage}!village-\/menu.h@{village-\/menu.h}}
+\doxysubsubsection{\texorpdfstring{enterVillage()}{enterVillage()}}
+{\footnotesize\ttfamily \label{village-menu_8h_af714c720a9bcb37dc9852d2d3159fdc7} 
+void enter\+Village (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Enters the main village square loop. 
+
+
+\begin{DoxyItemize}
+\item This is the primary game state. It displays the village menu and handles navigation between sub-\/locations. It also manages the visibility of locations based on whether it is Day or Night.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the \doxylink{structPlayer}{Player} structure to track location and time state.\\
+\hline
+\end{DoxyParams}
+Enters the main village square loop.
+\item This function handles the "{}\+Day/\+Night"{} cycle constraints\+:
+\item {\bfseries{Missions\+:}} Only available at Night.
+\item {\bfseries{Blacksmith\+:}} Only available during the Day.
+\item {\bfseries{Tavern\+:}} Always available (but menu changes internally).
+\item {\bfseries{Waiting\+:}} Allows manual transition from Day to Night.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

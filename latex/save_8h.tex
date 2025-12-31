@@ -1,0 +1,78 @@
+\doxysection{save.\+h File Reference}
+\hypertarget{save_8h}{}\label{save_8h}\index{save.h@{save.h}}
+
+
+Binary serialization for player progress.  
+
+
+{\ttfamily \#include "{}player.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{save_8h_a27aaf96e9bd1214e6dbe3077942fc5ff}{save\+Game}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Saves the current Hero state to a binary file (.dat). Automatically finds the next available slot (save\+\_\+1.\+dat, save\+\_\+2.\+dat, etc.). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{save_8h_a509cf9dee9e097d06b5631e7c0ba6e09}{load\+Game\+Menu}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Displays available saves and handles Loading or Deletion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Binary serialization for player progress. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{save_8h_a509cf9dee9e097d06b5631e7c0ba6e09}\index{save.h@{save.h}!loadGameMenu@{loadGameMenu}}
+\index{loadGameMenu@{loadGameMenu}!save.h@{save.h}}
+\doxysubsubsection{\texorpdfstring{loadGameMenu()}{loadGameMenu()}}
+{\footnotesize\ttfamily \label{save_8h_a509cf9dee9e097d06b5631e7c0ba6e09} 
+int load\+Game\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Displays available saves and handles Loading or Deletion. 
+
+\begin{DoxyReturn}{Returns}
+1 if a game was successfully loaded, 0 otherwise.
+\end{DoxyReturn}
+Displays available saves and handles Loading or Deletion.
+
+
+\begin{DoxyItemize}
+\item Features\+:
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item {\bfseries{Scan\+:}} Loops and reads all "{}save\+\_\+\+X.\+dat"{} files to display stats.
+\item {\bfseries{Load\+:}} Reads the binary data directly into the hero struct.
+\item {\bfseries{Delete\+:}} Removes a file and {\bfseries{reorganizes}} the remaining files (e.\+g., if you delete slot 2, slot 3 is renamed to 2) to maintain a continuous list.
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure to be populated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if a game was loaded, 0 if deleted or cancelled. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\Hypertarget{save_8h_a27aaf96e9bd1214e6dbe3077942fc5ff}\index{save.h@{save.h}!saveGame@{saveGame}}
+\index{saveGame@{saveGame}!save.h@{save.h}}
+\doxysubsubsection{\texorpdfstring{saveGame()}{saveGame()}}
+{\footnotesize\ttfamily \label{save_8h_a27aaf96e9bd1214e6dbe3077942fc5ff} 
+void save\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Saves the current Hero state to a binary file (.dat). Automatically finds the next available slot (save\+\_\+1.\+dat, save\+\_\+2.\+dat, etc.). 
+
+Saves the current Hero state to a binary file (.dat). Automatically finds the next available slot (save\+\_\+1.\+dat, save\+\_\+2.\+dat, etc.).
+
+
+\begin{DoxyItemize}
+\item Automatically iterates through "{}save\+\_\+\+X.\+dat"{} names to find the first empty slot to prevent overwriting existing saves. 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player data to be saved. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

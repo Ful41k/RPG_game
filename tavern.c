@@ -1,3 +1,8 @@
+/**
+ * @file tavern.c
+ * @brief Implementation of Tavern NPCs and mini-games.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "tavern.h"
@@ -14,10 +19,16 @@ static void buyInstantFood(Player* hero);
 static void playDiceGame(Player* hero);
 static void sleepInTavern(Player* hero);
 
+/**
+ * @brief Main logic for the Tavern environment.
+ * * Branches between Day and Night versions of the tavern. 
+ * - **Day:** Access to quests and the blacksmith hint.
+ * - **Night:** Access to gambling and sleeping.
+ * @param hero Pointer to the player structure.
+ */
 void enterTavern(Player* hero) {
     if (hero->isDay) {
-        // --- ДЕНЬ ---
-        hero->aleDrankCount = 0; // Сброс счетчика днем
+        hero->aleDrankCount = 0; 
         print_typewriter(YELLOW "\n[DAY] The tavern is lively." RESET, 30);
         
         while (1) {
@@ -73,6 +84,12 @@ void enterTavern(Player* hero) {
     }
 }
 
+/**
+ * @brief Handles the merchant dialogue with Barnaby.
+ * * Manages the "Master Edward" introduction which unlocks free resting.
+ * Also acts as the trigger for unlocking the Blacksmith location.
+ * @param hero Pointer to the player structure.
+ */
 static void talkToSeller(Player* hero) {
     if (hero->introBarnabyDone == 0) {
         print_typewriter(CYAN "\nBarnaby: \"Welcome to The Rusty Tankard. What do you need?\"" RESET, TEXT_SPEED);
@@ -122,12 +139,19 @@ static void talkToSeller(Player* hero) {
     }
 }
 
+/**
+ * @brief Logic for purchasing food and drinks.
+ * * Implements the "Hangover" mechanic. Every Ale consumed increases the
+ * risk of a hangover (20% -> 60% -> 100%). Potions are restricted
+ * to daytime purchases only.
+ * @param hero Pointer to the player structure.
+ */
 static void buyInstantFood(Player* hero) {
     while(1) {
         printf("\n--- Menu ---\n");
         printf("1. Water (2c) -> +5 HP\n");
         printf("2. Bread (10c) -> +15 HP\n");
-        printf("3. Roasted Meat (20c) -> +30 HP\n");
+        printf("3. Roasted Meat (20c) -> +20 HP\n");
         
         int chance = (hero->aleDrankCount == 0) ? 20 : (hero->aleDrankCount == 1 ? 60 : 100);
         printf("4. Ale (5c) -> +10 HP (Risk: %d%%)\n", chance);
@@ -160,7 +184,7 @@ static void buyInstantFood(Player* hero) {
         int cost = 0, heal = 0;
         if (c == 1) { cost = 2; heal = 5; }
         if (c == 2) { cost = 10; heal = 15; }
-        if (c == 3) { cost = 20; heal = 30; }
+        if (c == 3) { cost = 20; heal = 20; }
         if (c == 4) { cost = 5; heal = 10; }
 
         if (hero->coins >= cost) {
@@ -187,6 +211,12 @@ static void buyInstantFood(Player* hero) {
     }
 }
 
+/**
+ * @brief Manages interaction with Garrick (the Sad Man).
+ * * Allows the player to learn Garrick's name and provides an option to 
+ * "End the Day" early by drinking, which triggers a forced sleep and hangover.
+ * @param hero Pointer to the player structure.
+ */
 static void talkToSadMan(Player* hero) {
     while(1) {
         if (hero->knowsSadMan)
@@ -219,6 +249,15 @@ static void talkToSadMan(Player* hero) {
     }
 }
 
+/**
+ * @brief Handles the quest logic for Elara.
+ * * Manages the state machine for "The Lost Locket" quest:
+ * - State 0: Quest offered.
+ * - State 1: Quest active (searching).
+ * - State 2: Item found (waiting for turn-in).
+ * - State 3: Quest completed.
+ * @param hero Pointer to the player structure.
+ */
 static void talkToWoman(Player* hero) {
     while(1) {
         if (hero->knowsWoman)
@@ -261,9 +300,9 @@ static void talkToWoman(Player* hero) {
                 print_typewriter(MAGENTA "Elara: \"Please, hurry. I cannot sleep without it.\"" RESET, TEXT_SPEED);
             } else if (hero->elaraQuestStatus == 2) {
                 print_typewriter(GREEN "Elara: \"You found it! Oh, thank you!\"" RESET, TEXT_SPEED);
-                print_typewriter(YELLOW "Reward: 150 Coins, 100 XP." RESET, 30);
-                hero->coins += 150;
-                addXp(hero, 100);
+                print_typewriter(YELLOW "Reward: 100 Coins, 1 small potion." RESET, 30);
+                hero->coins += 100;
+                hero->potionsSmall += 1;
                 hero->elaraQuestStatus = 3;
             } else {
                 print_typewriter(MAGENTA "Elara: \"You are my hero.\"" RESET, TEXT_SPEED);
@@ -273,6 +312,12 @@ static void talkToWoman(Player* hero) {
     }
 }
 
+/**
+ * @brief Processes the transition to the next day.
+ * * Fully restores Player HP, resets the hangover/ale counters, and 
+ * sets the global `isDay` flag to 1.
+ * @param hero Pointer to the player structure.
+ */
 static void sleepInTavern(Player* hero) {
     print_typewriter(MAGENTA "\nYou sleep soundly in a warm bed..." RESET, 40);
     hero->hp = hero->maxhp;
@@ -282,6 +327,12 @@ static void sleepInTavern(Player* hero) {
     print_typewriter(YELLOW "Dawn has broken. You feel refreshed." RESET, 30);
 }
 
+/**
+ * @brief High-Low Dice mini-game with Garrick.
+ * * A simple gambling mechanic using 2d6. Player wins double their bet
+ * if their roll is higher than the NPC's.
+ * @param hero Pointer to the player structure.
+ */
 static void playDiceGame(Player* hero) {
     print_typewriter(BLUE "\nGarrick: \"High roll wins. Ready?\"" RESET, TEXT_SPEED);
     printf("Coins: %d\n", hero->coins);

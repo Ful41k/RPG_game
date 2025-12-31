@@ -1,0 +1,70 @@
+\doxysection{final.\+h File Reference}
+\hypertarget{final_8h}{}\label{final_8h}\index{final.h@{final.h}}
+
+
+Entry point for the final confrontation with Arxen Voidheart.  
+
+
+{\ttfamily \#include "{}player.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{final_8h_a5d47c8e2a22c99d283dea003e66344c2}{run\+Final\+Mission}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Main sequence for the Dark Lord\textquotesingle{}s Castle mission. Handles the 10-\/corridor progression, random Void whispers, and triggers the final boss battle. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{final_8h_ae7c83e4d97d50567cda5b807d89d6652}{padovan}} (int n)
+\begin{DoxyCompactList}\small\item\em A recursive mathematical requirement (Padovan sequence). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entry point for the final confrontation with Arxen Voidheart. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{final_8h_ae7c83e4d97d50567cda5b807d89d6652}\index{final.h@{final.h}!padovan@{padovan}}
+\index{padovan@{padovan}!final.h@{final.h}}
+\doxysubsubsection{\texorpdfstring{padovan()}{padovan()}}
+{\footnotesize\ttfamily \label{final_8h_ae7c83e4d97d50567cda5b807d89d6652} 
+int padovan (\begin{DoxyParamCaption}\item[{int}]{n}{}\end{DoxyParamCaption})}
+
+
+
+A recursive mathematical requirement (Padovan sequence). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The index in the sequence. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The n-\/th Padovan number. 
+\end{DoxyReturn}
+\Hypertarget{final_8h_a5d47c8e2a22c99d283dea003e66344c2}\index{final.h@{final.h}!runFinalMission@{runFinalMission}}
+\index{runFinalMission@{runFinalMission}!final.h@{final.h}}
+\doxysubsubsection{\texorpdfstring{runFinalMission()}{runFinalMission()}}
+{\footnotesize\ttfamily \label{final_8h_a5d47c8e2a22c99d283dea003e66344c2} 
+void run\+Final\+Mission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Main sequence for the Dark Lord\textquotesingle{}s Castle mission. Handles the 10-\/corridor progression, random Void whispers, and triggers the final boss battle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure.\\
+\hline
+\end{DoxyParams}
+Main sequence for the Dark Lord\textquotesingle{}s Castle mission. Handles the 10-\/corridor progression, random Void whispers, and triggers the final boss battle.
+
+
+\begin{DoxyItemize}
+\item Iterates through 10 rooms with\+:
+\item 60\% Chance\+: Narrative whispers from Arxen.
+\item 25\% Chance\+: Combat encounter (-\/3 HP).
+\item 15\% Chance\+: Trap/\+Healing events. 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

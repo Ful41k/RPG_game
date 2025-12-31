@@ -1,12 +1,26 @@
+/**
+ * @file final.c
+ * @brief Implementation of the endgame mission and Rock-Paper-Scissors boss battle.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "final.h"
 #include "utils.h"
 #include "color.h"
+#include "missions.h"
 
 void finalBossBattle(Player* hero);
 
+/**
+ * @brief The final narrative sequence.
+ * * Iterates through 10 rooms with:
+ * - 60% Chance: Narrative whispers from Arxen.
+ * - 25% Chance: Combat encounter (-3 HP).
+ * - 15% Chance: Trap/Healing events.
+ * @param hero Pointer to the player structure.
+ */
 void runFinalMission(Player* hero) {
     clear_screen();
     
@@ -70,6 +84,15 @@ void runFinalMission(Player* hero) {
     }
 }
 
+/**
+ * @brief Executes the final duel against Arxen Voidheart.
+ * * Uses a Victory Point system (Best of 5 / First to 3).
+ * Combat is a themed Rock-Paper-Scissors:
+ * - Shield (Rock) beats Sword (Scissors)
+ * - Magic (Paper) beats Shield (Rock)
+ * - Sword (Scissors) beats Magic (Paper)
+ * * @param hero Pointer to the player structure.
+ */
 void finalBossBattle(Player* hero) {
     clear_screen();
     // Arxen's Description from Documentation
@@ -122,10 +145,11 @@ void finalBossBattle(Player* hero) {
     } else {
         clear_screen();
         printf(RED "##########################################################\n");
-        printf("#             DEFEAT: THE AGE OF ORDER BEGINS            #\n");
+        printf("#                       GAME OVER                        #\n");
         printf("##########################################################\n" RESET);
         print_typewriter("Arxen sighs as you fall. \"Chaos is finally silent.\"", 40);
         print_typewriter("The world enters an age of cold, eternal certainty.", 60);
-        hero->hp = 0;
+        waitForEnter();
+        hero->hp = 1;
     }
 }

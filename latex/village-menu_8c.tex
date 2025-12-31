@@ -1,0 +1,100 @@
+\doxysection{village-\/menu.c File Reference}
+\hypertarget{village-menu_8c}{}\label{village-menu_8c}\index{village-\/menu.c@{village-\/menu.c}}
+
+
+Implementation of the central hub and Blacksmith interactions.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}village-\/menu.\+h"{}}\newline
+{\ttfamily \#include "{}player.\+h"{}}\newline
+{\ttfamily \#include "{}tavern.\+h"{}}\newline
+{\ttfamily \#include "{}missions.\+h"{}}\newline
+{\ttfamily \#include "{}save.\+h"{}}\newline
+{\ttfamily \#include "{}color.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+{\ttfamily \#include "{}cheats.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{village-menu_8c_a7776ade95035ce6ab6d61b9a35c264ed}{TEXT\+\_\+\+SPEED}}~20
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{village-menu_8c_a80b7e4147f547f9ea6b227e97dd3c1d1}{display\+Status\+Bar}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em Renders the visual status bar at the top of the terminal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{village-menu_8c_af714c720a9bcb37dc9852d2d3159fdc7}{enter\+Village}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero)
+\begin{DoxyCompactList}\small\item\em The main loop for village interaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the central hub and Blacksmith interactions. 
+
+
+\begin{DoxyItemize}
+\item Acts as the primary state manager for the player\textquotesingle{}s loop. It controls access to missions based on time of day and handles permanent player upgrades through the Blacksmith. 
+\end{DoxyItemize}
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{village-menu_8c_a7776ade95035ce6ab6d61b9a35c264ed}\index{village-\/menu.c@{village-\/menu.c}!TEXT\_SPEED@{TEXT\_SPEED}}
+\index{TEXT\_SPEED@{TEXT\_SPEED}!village-\/menu.c@{village-\/menu.c}}
+\doxysubsubsection{\texorpdfstring{TEXT\_SPEED}{TEXT\_SPEED}}
+{\footnotesize\ttfamily \label{village-menu_8c_a7776ade95035ce6ab6d61b9a35c264ed} 
+\#define TEXT\+\_\+\+SPEED~20}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{village-menu_8c_a80b7e4147f547f9ea6b227e97dd3c1d1}\index{village-\/menu.c@{village-\/menu.c}!displayStatusBar@{displayStatusBar}}
+\index{displayStatusBar@{displayStatusBar}!village-\/menu.c@{village-\/menu.c}}
+\doxysubsubsection{\texorpdfstring{displayStatusBar()}{displayStatusBar()}}
+{\footnotesize\ttfamily \label{village-menu_8c_a80b7e4147f547f9ea6b227e97dd3c1d1} 
+void display\+Status\+Bar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+Renders the visual status bar at the top of the terminal. 
+
+
+\begin{DoxyItemize}
+\item Displays\+:
+\item \doxylink{structPlayer}{Player} identity (Name)
+\item Vitality (HP/\+Max\+HP)
+\item Wealth (Coins)
+\item Combat stats (ATK/\+DEF)
+\item Temporal status (Day/\+Night)
+\item Equipment (Sword/\+Armor)
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{village-menu_8c_af714c720a9bcb37dc9852d2d3159fdc7}\index{village-\/menu.c@{village-\/menu.c}!enterVillage@{enterVillage}}
+\index{enterVillage@{enterVillage}!village-\/menu.c@{village-\/menu.c}}
+\doxysubsubsection{\texorpdfstring{enterVillage()}{enterVillage()}}
+{\footnotesize\ttfamily \label{village-menu_8c_af714c720a9bcb37dc9852d2d3159fdc7} 
+void enter\+Village (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{}\end{DoxyParamCaption})}
+
+
+
+The main loop for village interaction. 
+
+Enters the main village square loop.
+
+
+\begin{DoxyItemize}
+\item This function handles the "{}\+Day/\+Night"{} cycle constraints\+:
+\item {\bfseries{Missions\+:}} Only available at Night.
+\item {\bfseries{Blacksmith\+:}} Only available during the Day.
+\item {\bfseries{Tavern\+:}} Always available (but menu changes internally).
+\item {\bfseries{Waiting\+:}} Allows manual transition from Day to Night.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}

@@ -74,8 +74,6 @@ Player createNewHero() {
     hero.hp = 20; hero.maxhp = 20;
     hero.atk = 2; hero.def = 0; 
     hero.coins = 50; 
-    hero.xp = 0;
-    hero.level = 1; hero.xpToNextLevel = 100;
     hero.rage = 0; hero.maxRage = 100;
     hero.potionsSmall = 0; hero.potionsBig = 0;
     hero.inventoryCount = 0;
@@ -86,6 +84,7 @@ Player createNewHero() {
     hero.isDay = 1; 
     hero.hasBaseSword = 0;
     hero.hasBaseArmor = 0;
+    hero.hasCastleKey = 0;
     hero.upgradeLevelSword = 0;
     hero.upgradeLevelArmor = 0;
     
@@ -101,25 +100,9 @@ Player createNewHero() {
 }
 
 void addXp(Player* hero, int amount) {
-    hero->xp += amount;
-    char msg[64];
-    sprintf(msg, CYAN "You gained %d XP." RESET, amount);
-    print_typewriter(msg, 20);
 
-    while (hero->xp >= hero->xpToNextLevel) {
-        hero->xp -= hero->xpToNextLevel;
-        hero->level++;
-        hero->maxhp += 10;
-        hero->hp = hero->maxhp;
-        hero->atk += 1;
-        hero->xpToNextLevel = (int)(hero->xpToNextLevel * 1.5);
-        
-        print_typewriter(YELLOW "\n*** LEVEL UP! ***" RESET, 30);
-        char levelMsg[128];
-        sprintf(levelMsg, YELLOW "Level %d reached! Max HP -> %d, Attack -> %d." RESET, hero->level, hero->maxhp, hero->atk);
-        print_typewriter(levelMsg, 30);
     }
-}
+
 
 void addItemToInventory(Player* hero, const char* itemName) {
     if (hero->inventoryCount < INVENTORY_SIZE) {

@@ -1,0 +1,52 @@
+\doxysection{player.\+c File Reference}
+\hypertarget{player_8c}{}\label{player_8c}\index{player.c@{player.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include "{}player.\+h"{}}\newline
+{\ttfamily \#include "{}color.\+h"{}}\newline
+{\ttfamily \#include "{}utils.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{player_8c_a7776ade95035ce6ab6d61b9a35c264ed}{TEXT\+\_\+\+SPEED}}~25
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structPlayer}{Player}} \mbox{\hyperlink{player_8c_a7d74c35407f819b5be279f26b9b8ae37}{create\+New\+Hero}} ()
+\item 
+void \mbox{\hyperlink{player_8c_a4f9663c9cb15466169143672c331b854}{add\+Xp}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero, int amount)
+\item 
+void \mbox{\hyperlink{player_8c_aea0ca72d142424e40cd11fb471384928}{add\+Item\+To\+Inventory}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero, const char \texorpdfstring{$\ast$}{*}item\+Name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{player_8c_a7776ade95035ce6ab6d61b9a35c264ed}\index{player.c@{player.c}!TEXT\_SPEED@{TEXT\_SPEED}}
+\index{TEXT\_SPEED@{TEXT\_SPEED}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{TEXT\_SPEED}{TEXT\_SPEED}}
+{\footnotesize\ttfamily \label{player_8c_a7776ade95035ce6ab6d61b9a35c264ed} 
+\#define TEXT\+\_\+\+SPEED~25}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{player_8c_aea0ca72d142424e40cd11fb471384928}\index{player.c@{player.c}!addItemToInventory@{addItemToInventory}}
+\index{addItemToInventory@{addItemToInventory}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{addItemToInventory()}{addItemToInventory()}}
+{\footnotesize\ttfamily \label{player_8c_aea0ca72d142424e40cd11fb471384928} 
+void add\+Item\+To\+Inventory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{item\+Name}{}\end{DoxyParamCaption})}
+
+\Hypertarget{player_8c_a4f9663c9cb15466169143672c331b854}\index{player.c@{player.c}!addXp@{addXp}}
+\index{addXp@{addXp}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{addXp()}{addXp()}}
+{\footnotesize\ttfamily \label{player_8c_a4f9663c9cb15466169143672c331b854} 
+void add\+Xp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{, }\item[{int}]{amount}{}\end{DoxyParamCaption})}
+
+\Hypertarget{player_8c_a7d74c35407f819b5be279f26b9b8ae37}\index{player.c@{player.c}!createNewHero@{createNewHero}}
+\index{createNewHero@{createNewHero}!player.c@{player.c}}
+\doxysubsubsection{\texorpdfstring{createNewHero()}{createNewHero()}}
+{\footnotesize\ttfamily \label{player_8c_a7d74c35407f819b5be279f26b9b8ae37} 
+\mbox{\hyperlink{structPlayer}{Player}} create\+New\+Hero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+

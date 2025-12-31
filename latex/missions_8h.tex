@@ -1,0 +1,100 @@
+\doxysection{missions.\+h File Reference}
+\hypertarget{missions_8h}{}\label{missions_8h}\index{missions.h@{missions.h}}
+
+
+Function prototypes and constants for the RPG mission system.  
+
+
+{\ttfamily \#include "{}player.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{Indent}\textbf{ Mission IDs}\par
+{\em Numeric identifiers for the game\textquotesingle{}s biomes. }\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{missions_8h_a4b811a40d224167a191ce31edee8120f}{MISSION\+\_\+\+SWAMP}}~1
+\item 
+\#define \mbox{\hyperlink{missions_8h_a867e0de2f1525a67aa305db2cf77e160}{MISSION\+\_\+\+MANSION}}~2
+\item 
+\#define \mbox{\hyperlink{missions_8h_acfd787564ee4b20026bf4fe6953ce250}{MISSION\+\_\+\+CAVE}}~3
+\item 
+\#define \mbox{\hyperlink{missions_8h_a04440c5f946af8c414a343e9e82cd3ed}{MISSION\+\_\+\+DARK\+\_\+\+LORD}}~4
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{missions_8h_a9b616c48b9be482c1ebc21b9dd522d6b}{run\+Mission}} (\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}hero, int mission\+Id)
+\begin{DoxyCompactList}\small\item\em Main entry point to start a specific mission biome. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{missions_8h_ab80f005039b55cdbdbea52bbbad3c622}{wait\+For\+Enter}} ()
+\begin{DoxyCompactList}\small\item\em Utility function to pause execution until the user presses Enter. Clears the input buffer before waiting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function prototypes and constants for the RPG mission system. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{missions_8h_acfd787564ee4b20026bf4fe6953ce250}\index{missions.h@{missions.h}!MISSION\_CAVE@{MISSION\_CAVE}}
+\index{MISSION\_CAVE@{MISSION\_CAVE}!missions.h@{missions.h}}
+\doxysubsubsection{\texorpdfstring{MISSION\_CAVE}{MISSION\_CAVE}}
+{\footnotesize\ttfamily \label{missions_8h_acfd787564ee4b20026bf4fe6953ce250} 
+\#define MISSION\+\_\+\+CAVE~3}
+
+The Crystal Cave (Mission 3) \Hypertarget{missions_8h_a04440c5f946af8c414a343e9e82cd3ed}\index{missions.h@{missions.h}!MISSION\_DARK\_LORD@{MISSION\_DARK\_LORD}}
+\index{MISSION\_DARK\_LORD@{MISSION\_DARK\_LORD}!missions.h@{missions.h}}
+\doxysubsubsection{\texorpdfstring{MISSION\_DARK\_LORD}{MISSION\_DARK\_LORD}}
+{\footnotesize\ttfamily \label{missions_8h_a04440c5f946af8c414a343e9e82cd3ed} 
+\#define MISSION\+\_\+\+DARK\+\_\+\+LORD~4}
+
+The Dark Lord\textquotesingle{}s Castle (Final Mission) \Hypertarget{missions_8h_a867e0de2f1525a67aa305db2cf77e160}\index{missions.h@{missions.h}!MISSION\_MANSION@{MISSION\_MANSION}}
+\index{MISSION\_MANSION@{MISSION\_MANSION}!missions.h@{missions.h}}
+\doxysubsubsection{\texorpdfstring{MISSION\_MANSION}{MISSION\_MANSION}}
+{\footnotesize\ttfamily \label{missions_8h_a867e0de2f1525a67aa305db2cf77e160} 
+\#define MISSION\+\_\+\+MANSION~2}
+
+The Haunted Mansion (Mission 2) \Hypertarget{missions_8h_a4b811a40d224167a191ce31edee8120f}\index{missions.h@{missions.h}!MISSION\_SWAMP@{MISSION\_SWAMP}}
+\index{MISSION\_SWAMP@{MISSION\_SWAMP}!missions.h@{missions.h}}
+\doxysubsubsection{\texorpdfstring{MISSION\_SWAMP}{MISSION\_SWAMP}}
+{\footnotesize\ttfamily \label{missions_8h_a4b811a40d224167a191ce31edee8120f} 
+\#define MISSION\+\_\+\+SWAMP~1}
+
+The Rotting Swamp (Mission 1) 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{missions_8h_a9b616c48b9be482c1ebc21b9dd522d6b}\index{missions.h@{missions.h}!runMission@{runMission}}
+\index{runMission@{runMission}!missions.h@{missions.h}}
+\doxysubsubsection{\texorpdfstring{runMission()}{runMission()}}
+{\footnotesize\ttfamily \label{missions_8h_a9b616c48b9be482c1ebc21b9dd522d6b} 
+void run\+Mission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structPlayer}{Player}} \texorpdfstring{$\ast$}{*}}]{hero}{, }\item[{int}]{mission\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Main entry point to start a specific mission biome. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player structure. \\
+\hline
+{\em mission\+Id} & The ID of the mission to be launched (1-\/4).\\
+\hline
+\end{DoxyParams}
+Main entry point to start a specific mission biome.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hero} & Pointer to the player struct. \\
+\hline
+{\em mission\+Id} & The ID of the mission to load. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{missions_8h_ab80f005039b55cdbdbea52bbbad3c622}\index{missions.h@{missions.h}!waitForEnter@{waitForEnter}}
+\index{waitForEnter@{waitForEnter}!missions.h@{missions.h}}
+\doxysubsubsection{\texorpdfstring{waitForEnter()}{waitForEnter()}}
+{\footnotesize\ttfamily \label{missions_8h_ab80f005039b55cdbdbea52bbbad3c622} 
+void wait\+For\+Enter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Utility function to pause execution until the user presses Enter. Clears the input buffer before waiting. 
+
+Utility function to pause execution until the user presses Enter. Clears the input buffer before waiting. 
