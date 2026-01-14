@@ -37,49 +37,55 @@ void runMission(Player* hero, int missionId) {
     if (missionId == MISSION_SWAMP) b = 1;
     else if (missionId == MISSION_MANSION) b = 2;
     else if (missionId == MISSION_CAVE) b = 3;
-    else b = 4; // Mission 4 is the Castle
+    else b = 4; // Mission 4 is the Dark Lord's Castle
 
     char* biomeName;
     if (b == 1) biomeName = "Rotting Swamp";
     else if (b == 2) biomeName = "Haunted Mansion";
     else if (b == 3) biomeName = "Crystal Cave";
-    else biomeName = "Dark Lord's Castle" ;
+    else biomeName = "Dark Lord's Castle";
+
     while (1) {
         printf(YELLOW "\n--- %s Menu ---\n" RESET, biomeName);
         printf("1. Enter Biome (Explore/Quest)\n");
-
-        int isCleared = (hero->maxUnlockedMission > b);
-        if (isCleared) {
-            printf("2. Return to Village " GREEN "(Free - Path Cleared!)\n" RESET);
-        } else {
-            printf("2. Return to Village " RED "(Cost: 50 Coins)\n" RESET);
-        }
-        print_prompt("Choice: ", 0);
+        printf("2. Return to Village\n");
+        printf("3. Exit Game\n");
+        printf("Choice: ");
         int c;
-        if (scanf("%d", &c) != 1) { while(getchar() != '\n'); continue; }
-
-        if (c == 1) {
+        if (scanf("%d", &c) != 1) {
+            while ( (c = getchar()) != '\n' && c != EOF ); //bug fix: clear invalid input
+            continue;
+        }
+        if (c == 3) {
+            return;
+        } else if (c == 1) {
             if (b == 1) runRottingSwamp(hero);
             else if (b == 2) runHauntedMansion(hero);
             else if (b == 3) runCrystalCave(hero);
-            else if (b == 4) { 
-                runFinalMission(hero); return;
-        }
-        if (hero->hp <= 1 && hero->isDay == 1) return;       
-    }
-        else if (c == 2) {
-            if (isCleared) {
-                printf(GREEN "You walk back to the village safely.\n" RESET);
+            else {
+                // bug fix: final mission
+                runFinalMission(hero);
+                return;
+            }
+            // bug fix: check if player died and respawned
+            if (hero->isDay == 1) {
+                return; // bug fix: Return to village
+            }
+        } else if (c == 2) {
+            // bug fix: Return to village
+            if (hero->coins >= 50) {
+                hero->coins -= 50;
+                printf("\nYou paid 50 coins to safely return to the village.\n");
+                waitForEnter();
                 return;
             } else {
-                if (hero->coins >= 50) {
-                    hero->coins -= 50;
-                    printf(GREEN "You paid 50 coins and returned to the Village.\n" RESET);
-                    return;
-                } else {
-                    printf(RED "You don't have 50 coins! You must clear the mission first.\n" RESET);
-                }
+                printf(RED "\nNot enough coins to return!\n" RESET);
+                waitForEnter();
             }
+        } else {
+            // added special case handling
+            printf(RED "\nInvalid choice. Try again.\n" RESET);
+            waitForEnter();
         }
     }
 }
@@ -120,20 +126,20 @@ static void respawnPlayer(Player* hero) {
     print_typewriter(CYAN "But a mysterious force pulls you back from the abyss." RESET, 40);
     print_typewriter(YELLOW "You wake up in the tavern, aching and confused." RESET, 40);
     print_typewriter(".  ", 25);
-    
-    hero->hp = 1;
-    hero->isDay = 1; 
 
-    int amountToLose = hero->coins / 2; 
-    hero->coins = hero->coins - amountToLose;
+    hero->hp = 1;
+    hero->isDay = 1;
+
+    int amountToLose = hero->coins / 2;
+    hero->coins -= amountToLose;
 
     printf(RED "Penalty: Lost %d Coins.\n" RESET, amountToLose);
     printf(GREEN "\nYou have %d coins remaining.\n" RESET, hero->coins);
     printf("Press Enter to return to the village...");
-    
+    fflush(stdout);
+
     int c;
-    while ((c = getchar()) != '\n' && c != EOF); 
-    getchar();
+    while ((c = getchar()) != '\n' && c != EOF); //bug fix: no input buffer
 }
 
 /**
@@ -179,7 +185,7 @@ void battleNormalFight(Player* hero, const char* name, int fatalStrike, int dmg,
     while (hero->hp > 0) {
         printf("\n%s's HP: " RED "%d" RESET " | Potions: " GREEN "%d" RESET " | Coins: " YELLOW "%d" RESET "\n", hero->name, hero->hp, hero->potionsSmall, hero->coins);
         printf("1. Roll Attack (Req: %d+)\n", fatalStrike);
-        printf("2. Use Healing Potion\n"); // ADDED THIS
+        printf("2. Use Healing Potion\n");
         print_prompt("Choice: ", 0);
         int choice;
         if (scanf("%d", &choice) != 1) { while(getchar() != '\n'); continue; }
@@ -202,7 +208,7 @@ void battleNormalFight(Player* hero, const char* name, int fatalStrike, int dmg,
                 hero->hp -= finalDmg;
             }
         } 
-        else if (choice == 2) { // POTION LOGIC
+        else if (choice == 2) {
             if (hero->potionsSmall > 0) {
                 tryUseHealingPotion(hero);
             } else {
@@ -212,13 +218,11 @@ void battleNormalFight(Player* hero, const char* name, int fatalStrike, int dmg,
 
         if (hero->hp <= 0) {
             clear_screen();
-
             hero->hp = 1; 
             hero->isDay = 1;
-
             respawnPlayer(hero);
             return;
-            }
+        }
     }
 }
 
@@ -258,12 +262,12 @@ static void runHauntedMansion(Player* hero) {
                 if (room == 5) {
                     printf(MAGENTA "\n[!] The air grows cold and tastes of copper and old parchment.\n" RESET);
                     print_typewriter("A creature formed of flickering shadows and broken glass emerges.", 40);
-                    print_typewriter("\nKAEL’ZHAR: 'Swear to me, little knight. Swear you will not turn back.'", 50);
+                    print_typewriter("\nKAEL'ZHAR: 'Swear to me, little knight. Swear you will not turn back.'", 50);
                     print_typewriter("'And when you break your word… I will be there to collect what is left of you.'", 50);
                     
                     int killed = 0;
-                    battleNormalFight(hero, "Kael’Zhar, the Oath-Eater", 4, 6, 20, &killed);
-                    if (hero->hp <= 0) return;
+                    battleNormalFight(hero, "Kael'Zhar, the Oath-Eater", 4, 6, 20, &killed);
+                    if (hero->isDay == 1) return; // Player died and respawned
                     if (killed) print_typewriter(CYAN "\nThe creature shatters into whispers: 'I shall wait for the crack...'\n" RESET, 30);
                     waitForEnter();
                     continue; 
@@ -278,7 +282,7 @@ static void runHauntedMansion(Player* hero) {
                     
                     int killed = 0;
                     battleNormalFight(hero, "Lord Vaelren", 5, 4, 100, &killed);
-                    if (hero->hp <= 0) return;
+                    if (hero->isDay == 1) return; // bug fix: player death and respawn
                     
                     if (killed) {
                         vampireKilled = 1;
@@ -314,7 +318,7 @@ static void runHauntedMansion(Player* hero) {
             if (vampireKilled) {
                 if (hero->maxUnlockedMission < 3) hero->maxUnlockedMission = 3;
                 print_typewriter(GREEN "\nThe Curse of Vaelren is lifted. The Crystal Cave is now open." RESET, 30);
-                break; // Exit the dungeon loop
+                break; //bug fix: get out of loop
             }
         }
     }
@@ -432,6 +436,7 @@ static void runCrystalCave(Player* hero) {
                         print_typewriter(RED "DRAGON: 'FOOL! The patterns of the universe are not for you! FEEL MY BURN!'" RESET, 40);
                         int killed = 0;
                         battleNormalFight(hero, "Ancient Dragon", 5, 10, 12, &killed);
+                        if (hero->isDay == 1) return; //bug fix: player death and respawn
 
                         if (hero->hp > 0 && killed == 1) {
                             dragonDefeated = 1;
@@ -471,15 +476,7 @@ static void runCrystalCave(Player* hero) {
 void runRottingSwamp(Player* hero) {
    while(1) {
     clear_screen(); 
-    int generalsDefeated = 0;
-    int rooms[10] = {0, 0, 0, 0, 0, 0, 0, 1, 1, 1}; 
-
-    for (int i = 0; i < 10; i++) {
-        int j = rand() % 10;
-        int temp = rooms[i];
-        rooms[i] = rooms[j];
-        rooms[j] = temp;
-    }
+    
     printf(GREEN "--- ROTTING SWAMP MENU ---\n" RESET);
     printf("1. Hunt the Orc Generals (Story Mission)\n");
         
@@ -496,114 +493,135 @@ void runRottingSwamp(Player* hero) {
     if (scanf("%d", &menuChoice) != 1) { while(getchar() != '\n'); continue; }
 
     if (menuChoice == 3) return; // Exit function
+    
     if (menuChoice == 1) {
         int generalsDefeated = 0;
         int rooms[10] = {0, 0, 0, 0, 0, 0, 0, 1, 1, 1};
 
-    clear_screen();
-    printf(GREEN "\n--- MISSION 1: THE ROTTING SWAMP ---\n" RESET);
-    print_typewriter("You step into the sludge. The air is thick with rot...", 30);
-    delay_ms(3000);
-
-    print_typewriter(YELLOW "\nYou enter the territory of the \"Brothers of the Drowned War.\"" RESET, 30);
-    print_typewriter("\nThree generals hold this marsh in the Dark Lord's name:", 30);
-    
-    printf(MAGENTA "\n\n1. GRASH THE BOUND" RESET);
-    printf("\n   Wrapped in spectral chains of a broken oath.");
-    
-    printf(MAGENTA "\n2. VOR'RAK BONEBREAKER" RESET);
-    printf("\n   A betrayed guard who wears human helmets as trophies.");
-    
-    printf(MAGENTA "\n3. MAELA THE ASH-WIND" RESET);
-    printf("\n   A hollow shaman who traded her memories to see your future.");
-    
-    print_typewriter(RED "\n\nDefeat them all to break the Dark Lord's hold on the swamp." RESET, 30);
-    
-    printf("\n\n(Press Enter to begin the hunt...)");
-    while(getchar() != '\n');
-
-    for (int i = 0; i < 10; i++) {
-        clear_screen();
-        printf(WHITE "\nROOM %d / 10\n" RESET, i + 1);
-        int killed = 0;
-
-        if (rooms[i] == 1) { 
-            generalsDefeated++;
-            clear_screen();
-
-            if (generalsDefeated == 1) {
-                printf(MAGENTA "\n[BOSS] GRASH THE BOUND\n" RESET);
-                printf(CYAN "\"The swamp belongs to the shadows now, as do I!\"\n" RESET);
-                printf("Black iron chains rattle as he raises his corrupted mace.\n");
-                battleNormalFight(hero, "Grash the Bound", 5, 3, 12, &killed);
-            } 
-            else if (generalsDefeated == 2) {
-                printf(MAGENTA "\n[BOSS] VOR'RAK BONEBREAKER\n" RESET);
-                printf(CYAN "\"I was your shield once... now I am your grave!\"\n" RESET);
-                printf("He points to a human helmet on his belt—it looks like yours.\n");
-                battleNormalFight(hero, "Vor'Rak Bonebreaker", 5, 3, 12, &killed);
-            } 
-            // MISSION COMPLETE: HOLY FOUNTAIN
-            if (hero->hp > 0 && generalsDefeated >= 3) {
-            clear_screen();
-            print_typewriter(CYAN "\n=== THE HOLY FOUNTAIN ===\n" RESET, 30);
-            print_typewriter("The military hold on the swamp is broken.\n", 30);
-            print_typewriter("The fountain's water glows with pure light.\n", 30);
-            print_typewriter("You are healed.\n", 30);
-            hero->hp = hero->maxhp; // Heal the player
-            if (hero->maxUnlockedMission < 2) hero->maxUnlockedMission = 2;
-            saveGame(hero);
-            waitForEnter();
-            break; // Back to swamp menu
-        } else {
-                clear_screen();
-                printf(MAGENTA "\n[BOSS] MAELA THE ASH-WIND\n" RESET);
-                printf(CYAN "\"I do not remember my mother's face, but I see your death.\"\n" RESET);
-                printf("The air turns cold as the Void-shaman prepares her spell.\n");
-                battleNormalFight(hero, "Maela the Ash-Wind", 6, 3, 12, &killed);
-            }
-        } else { // NORMAL ENCOUNTER OR TRAP
-            int roll = (rand() % 6) + 1;
-            if (roll == 1) {
-                printf("\nA Poisonous Bog lies ahead. You must cross carefully...");
-                delay_ms(1000);
-                int trapRoll = (rand() % 2); // 50/50 chance
-                if (trapRoll == 0) {
-                    int damage = (rand() % 6) + 1;
-                    printf(RED "\nYou sank deep! You take %d poison damage.\n" RESET, damage);
-                    hero->hp -= damage;
-                } else {
-                    printf(GREEN "\nYou leaped across the bog safely!\n" RESET);
-                }
-            } else if (roll == 2) battleNormalFight(hero, "Wild Dog", 2, 1, 0, &killed);
-            else if (roll == 3) battleNormalFight(hero, "Goblin", 3, 2, 2, &killed);
-            else if (roll == 4) battleNormalFight(hero, "Skeleton", 4, 2, 4, &killed);
-            else battleNormalFight(hero, "Orc", 4, 4, 6, &killed);
+        for (int i = 0; i < 10; i++) {
+            int j = rand() % 10;
+            int temp = rooms[i];
+            rooms[i] = rooms[j];
+            rooms[j] = temp;
         }
-        if (hero->hp <= 0) {
+
+        clear_screen();
+        printf(GREEN "\n--- MISSION 1: THE ROTTING SWAMP ---\n" RESET);
+        print_typewriter("You step into the sludge. The air is thick with rot...", 30);
+        delay_ms(3000);
+
+        print_typewriter(YELLOW "\nYou enter the territory of the \"Brothers of the Drowned War.\"" RESET, 30);
+        print_typewriter("\nThree generals hold this marsh in the Dark Lord's name:", 30);
+        
+        printf(MAGENTA "\n\n1. GRASH THE BOUND" RESET);
+        printf("\n   Wrapped in spectral chains of a broken oath.");
+        
+        printf(MAGENTA "\n2. VOR'RAK BONEBREAKER" RESET);
+        printf("\n   A betrayed guard who wears human helmets as trophies.");
+        
+        printf(MAGENTA "\n3. MAELA THE ASH-WIND" RESET);
+        printf("\n   A hollow shaman who traded her memories to see your future.");
+        
+        print_typewriter(RED "\n\nDefeat them all to break the Dark Lord's hold on the swamp." RESET, 30);
+        
+        printf("\n\n(Press Enter to begin the hunt...)");
+        while(getchar() != '\n');
+
+        for (int i = 0; i < 10; i++) {
+            clear_screen();
+            printf(WHITE "\nROOM %d / 10\n" RESET, i + 1);
+            int killed = 0;
+
+            if (rooms[i] == 1) { 
+                generalsDefeated++;
+                clear_screen();
+
+                if (generalsDefeated == 1) {
+                    printf(MAGENTA "\n[BOSS] GRASH THE BOUND\n" RESET);
+                    printf(CYAN "\"The swamp belongs to the shadows now, as do I!\"\n" RESET);
+                    printf("Black iron chains rattle as he raises his corrupted mace.\n");
+                    battleNormalFight(hero, "Grash the Bound", 5, 3, 12, &killed);
+                } 
+                else if (generalsDefeated == 2) {
+                    printf(MAGENTA "\n[BOSS] VOR'RAK BONEBREAKER\n" RESET);
+                    printf(CYAN "\"I was your shield once... now I am your grave!\"\n" RESET);
+                    printf("He points to a human helmet on his belt—it looks like yours.\n");
+                    battleNormalFight(hero, "Vor'Rak Bonebreaker", 5, 3, 12, &killed);
+                } 
+                else {
+                    printf(MAGENTA "\n[BOSS] MAELA THE ASH-WIND\n" RESET);
+                    printf(CYAN "\"I do not remember my mother's face, but I see your death.\"\n" RESET);
+                    printf("The air turns cold as the Void-shaman prepares her spell.\n");
+                    battleNormalFight(hero, "Maela the Ash-Wind", 6, 3, 12, &killed);
+                }
+
+                // bug fix: check if player death and respawm
+                if (hero->isDay == 1) return;
+
+                // MISSION COMPLETE: HOLY FOUNTAIN
+                if (hero->hp > 0 && generalsDefeated >= 3) {
+                    clear_screen();
+                    print_typewriter(CYAN "\n=== THE HOLY FOUNTAIN ===\n" RESET, 30);
+                    print_typewriter("The military hold on the swamp is broken.\n", 30);
+                    print_typewriter("The fountain's water glows with pure light.\n", 30);
+                    print_typewriter("You are healed.\n", 30);
+                    hero->hp = hero->maxhp; // Heal the player
+                    if (hero->maxUnlockedMission < 2) hero->maxUnlockedMission = 2;
+                    saveGame(hero);
+                    waitForEnter();
+                    break; // Back to swamp menu
+                }
+            } else { // NORMAL ENCOUNTER OR TRAP
+                int roll = (rand() % 6) + 1;
+                if (roll == 1) {
+                    printf("\nA Poisonous Bog lies ahead. You must cross carefully...");
+                    delay_ms(1000);
+                    int trapRoll = (rand() % 2); // 50/50 chance
+                    if (trapRoll == 0) {
+                        int damage = (rand() % 6) + 1;
+                        printf(RED "\nYou sank deep! You take %d poison damage.\n" RESET, damage);
+                        hero->hp -= damage;
+                    } else {
+                        printf(GREEN "\nYou leaped across the bog safely!\n" RESET);
+                    }
+                } else if (roll == 2) battleNormalFight(hero, "Wild Dog", 2, 1, 0, &killed);
+                else if (roll == 3) battleNormalFight(hero, "Goblin", 3, 2, 2, &killed);
+                else if (roll == 4) battleNormalFight(hero, "Skeleton", 4, 2, 4, &killed);
+                else battleNormalFight(hero, "Orc", 4, 4, 6, &killed);
+            }
+
+            // bug fix: Check if player died and respawn
+            if (hero->isDay == 1) return;
+
+            if (hero->hp <= 0) {
+                respawnPlayer(hero);
+                return;
+            }
+
+            if (i < 9) waitForEnter();
+        }
+    }
+
+    if (menuChoice == 2 && hero->elaraQuestStatus == 1) {
+        clear_screen();
+        printf(CYAN "--- QUEST: THE LOST LOCKET ---\n" RESET);
+        printf("You venture into a secluded, murky corner of the swamp...\n");
+        
+        int killed = 0;
+        battleNormalFight(hero, "Mud Ghoul", 5, 4, 30, &killed);
+        
+         // bug fix: Check if player died and respaw
+        if (hero->isDay == 1) return;
+        
+        if (hero->hp > 0 && killed) {
+            print_typewriter(GREEN "\nYou found the Locket! Return to the village.\n" RESET, 30);
+            hero->elaraQuestStatus = 2;
+            waitForEnter();
+        } else if (hero->hp <= 0) {
             respawnPlayer(hero);
             return;
         }
-        if (i < 9) waitForEnter();
     }
- }
-        if (menuChoice == 2 && hero->elaraQuestStatus == 1) {
-            clear_screen();
-            printf(CYAN "--- QUEST: THE LOST LOCKET ---\n" RESET);
-            printf("You venture into a secluded, murky corner of the swamp...\n");
-            
-            int killed = 0;
-            battleNormalFight(hero, "Mud Ghoul", 5, 4, 30, &killed);
-            
-            if (hero->hp > 0 && killed) {
-                print_typewriter(GREEN "\nYou found the Locket! Return to the village.\n" RESET, 30);
-                hero->elaraQuestStatus = 2;
-                waitForEnter();
-            } else if (hero->hp <= 0) {
-                return;
-            }
-        }
-    }
+   }
 }
-
 
