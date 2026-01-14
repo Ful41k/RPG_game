@@ -328,29 +328,37 @@ static void runHauntedMansion(Player* hero) {
                 if (hero->maxUnlockedMission < 3) {
                     hero->maxUnlockedMission = 3;
                 }
+                hero->isDay = 1;
                 print_typewriter(GREEN "\nThe Curse of Vaelren is lifted. The Crystal Cave is now open." RESET, 30);
-                break;
+                waitForEnter();
+                return;
             }
         }
     }
 }
 
 int isPadovan(int n) {
-    if (n == 1 || n == 2) {
+    if (n == 1) {
         return 1;
     }
-    int p0 = 1, p1 = 1, p2 = 1, pNext = 0;
-
-    while (pNext <= n) {
-        pNext = p0 + p1;
+    if (n == 2) {
+        return 1;
+    }
+    
+    int p0 = 1, p1 = 1, p2 = 1;
+    
+    while (1) {
+        int pNext = p0 + p1;
         if (pNext == n) {
             return 1;
+        }
+        if (pNext > n) {
+            return 0;
         }
         p0 = p1;
         p1 = p2;
         p2 = pNext;
     }
-    return 0;
 }
 
 static void runCrystalCave(Player* hero) {
@@ -486,8 +494,10 @@ static void runCrystalCave(Player* hero) {
                 if (hero->maxUnlockedMission < 4) {
                     hero->maxUnlockedMission = 4;
                 }
+                hero->isDay = 1;
                 print_typewriter(MAGENTA "\nThe path to the Dark Lord's Castle is now open!" RESET, 30);
-                break; 
+                waitForEnter();
+                return;
             }
         }
     }
@@ -589,12 +599,13 @@ void runRottingSwamp(Player* hero) {
                         print_typewriter("The fountain's water glows with pure light.\n", 30);
                         print_typewriter("You are healed.\n", 30);
                         hero->hp = hero->maxhp;
+                        hero->isDay = 1;
                         if (hero->maxUnlockedMission < 2) {
                             hero->maxUnlockedMission = 2;
                         }
                         saveGame(hero);
                         waitForEnter();
-                        break;
+                        return;
                     }
                 } else { 
                     int roll = (rand() % 6) + 1;
@@ -658,4 +669,3 @@ void runRottingSwamp(Player* hero) {
         }
     }
 }
-
