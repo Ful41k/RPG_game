@@ -58,7 +58,7 @@ void runMission(Player* hero, int missionId) {
     while (1) {
         printf(YELLOW "\n--- %s Menu ---\n" RESET, biomeName);
         printf("1. Enter Biome (Explore/Quest)\n");
-        printf("2. Return to Village (costs 50 coins)\n");
+        printf("2. Return to Village\n");
         printf("3. Exit Game\n");
         printf("Choice: ");
         int c;
